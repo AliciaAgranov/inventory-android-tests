@@ -1,0 +1,2 @@
+12:36:06.504 [Test worker] INFO  com.inventory.tests.TestBase - Start test downloadInventoryFromMFC
+12:38:31.027 [Test worker] INFO  com.inventory.tests.TestBase - Stop test downloadInventoryFromMFC

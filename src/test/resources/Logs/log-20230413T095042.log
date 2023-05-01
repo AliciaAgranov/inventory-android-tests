@@ -1,0 +1,2 @@
+09:50:56.126 [Test worker] INFO  com.inventory.tests.TestBase - Start test downloadCoreConfiguration
+09:51:44.720 [Test worker] INFO  com.inventory.tests.TestBase - Stop test downloadCoreConfiguration

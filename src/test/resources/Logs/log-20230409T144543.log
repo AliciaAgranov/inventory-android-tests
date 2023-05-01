@@ -1,0 +1,2 @@
+14:46:03.598 [Test worker] INFO  com.inventory.tests.TestBase - Start test testAppOpened
+14:46:03.613 [Test worker] INFO  com.inventory.tests.TestBase - Stop test testAppOpened

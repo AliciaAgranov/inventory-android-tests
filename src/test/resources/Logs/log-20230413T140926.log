@@ -1,0 +1,2 @@
+14:09:41.636 [Test worker] INFO  com.inventory.tests.TestBase - Start test signAndSendInventoryToMFC
+14:09:56.785 [Test worker] INFO  com.inventory.tests.TestBase - Stop test signAndSendInventoryToMFC

@@ -1,0 +1,2 @@
+15:36:01.249 [Test worker] INFO  com.inventory.tests.TestBase - Start test newUserRegistration
+15:37:14.563 [Test worker] INFO  com.inventory.tests.TestBase - Stop test newUserRegistration
