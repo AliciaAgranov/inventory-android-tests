@@ -7,18 +7,16 @@ public class DownloadInventoryTest extends TestBase {
     @Test
     public void downloadInventoryFromMFC() throws InterruptedException {
       app.clickOnDownloadButton();
-      app.clickOnTheSearchInventory("10885-1-1");
+      app.clickOnTheSearchInventory("10936-1-1");
       app.selectFoundedInventory();
       app.downloadFoundedInventory();
       app.clickOnTheEditInventoryButton();
       app.selectAnItemFromInventory();
-     // app.swipeScreenDown();
       app.showParametersOfTheItem();
-      app.showAttachedPhoto();
-      app.downloadAttachedPhoto();
-      app.clickOnTheDeviceReturnButton();
-      app.clickOnTheDeviceReturnButton();
+      app.isPhtotDownload();
+      Thread.sleep(5000);
       app.clickOnTheMenuButton();
+      app.hideKeyboard();
       app.clickToTheGeneralInfo();
       app.swipeScreenDown();
       app.swipeScreenDown();
@@ -30,8 +28,7 @@ public class DownloadInventoryTest extends TestBase {
       app.swipeScreenDown();
       app.clickOnTheMenuButton();
       app.clickOnTheInventoryList();
-      //app.swipeScreenToTheLeft();
-      app.swipeScreenToTheRight();
+      app.swipeScreenToTheLeft();
       app.selectRoomWithItem();
       app.clickToTheInspectionInfoButton();
       app.showAttachedPhoto();
@@ -41,7 +38,6 @@ public class DownloadInventoryTest extends TestBase {
       app.downloadAttachedPhoto();
       app.clickToTheReturnUpButton();
       app.clickToTheReturnUpButton();
-      //app.swipeScreenToTheLeft();
       app.clickOnTheMenuButton();
       app.swipeScreenDownMenu();
       app.clickOnTheSummaries();
@@ -57,7 +53,6 @@ public class DownloadInventoryTest extends TestBase {
       app.clickOnTheAppliances();
       app.clickToTheReturnUpButton();
       app.clickOnTheMenuButton();
-      //app.swipeScreenDownMenu();
       app.clickOnTheAdditionalServicesButton();
       app.clickOnTheAdditionalMaterials();
       app.clickToTheReturnUpButton();

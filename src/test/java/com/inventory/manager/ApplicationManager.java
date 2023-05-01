@@ -17,6 +17,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import sun.swing.SwingUtilities2;
 
 import javax.swing.*;
 import java.io.File;
@@ -56,7 +57,11 @@ public class ApplicationManager {
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+
+        
     }
+
+
 
     public void type(By locator, String text) {
         if (text != null) {
@@ -190,10 +195,12 @@ public class ApplicationManager {
     }
 
     public void clickOnTheEditInventoryButton() {
+        waitForElement(60, By.id("editInventory"));
         click(By.id("editInventory"));
     }
 
     public void clickOnTheAddPieceButton() {
+        waitForElement(60,By.id("fab_add"));
         click(By.id("fab_add"));
     }
 
@@ -487,7 +494,7 @@ public class ApplicationManager {
         if (isElementPresent(By.xpath("//*[contains(@text, 'Cabinet')]"))) {
             click(By.xpath("//*[contains(@text, 'Cabinet')]"));
         } else
-            click(By.xpath("//*[contains(@text, 'Hall Stand')]"));
+            System.out.println("The transaction isn't contain Items");
     }
 
     public void showAttachedPhoto() {
@@ -681,12 +688,12 @@ public class ApplicationManager {
     }
 
     public void clickOnTheMenuButton() {
-        waitForElement(15, (By.xpath("//*[contains(@class, 'android.widget.ImageButton') and @index=0]")));
-        click(By.xpath("//*[contains(@class, 'android.widget.ImageButton') and @index=0]"));
+        click(By.xpath("//android.widget.ImageButton[@content-desc='Navigate up']"));
+
     }
 
     public void clickToTheGeneralInfo() {
-        click(By.xpath("//*[contains(@class,'android.widget.LinearLayout') and @index=0]"));
+        click(By.xpath("//*[contains(@resource-id,'submenu') and @text='General Info']"));;
     }
 
     public void clickOnTheSummaries() {
@@ -978,6 +985,25 @@ public class ApplicationManager {
        click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
        Thread.sleep(1000);
        click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
+
+   }
+
+   public void isPhtotDownload() throws InterruptedException {
+       click(By.xpath("//*[contains(@class,'android.widget.ImageView')]"));
+       if (isElementPresent(By.id("alertTitle"))) {
+           click(By.xpath("//*[contains(@resource-id, 'button1') and @text='YES']"));
+           sleep(3000);
+           click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
+           sleep(2000);
+           click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
+           sleep(2000);
+           click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
+       } else
+           //click(By.xpath("//*[@content-desc='???']"));
+           click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
+       sleep(1000);
+           click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
+       // for Polina's device
 
    }
 }
