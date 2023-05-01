@@ -434,7 +434,7 @@ public class ApplicationManager {
     }
 
     public void clickOnTheOKButtonOnThePopUp() {
-        waitForElement(30, (By.xpath("//*[contains(@resource-id,'button3') and @text='OK']")));
+        waitForElement(40, (By.xpath("//*[contains(@resource-id,'button3') and @text='OK']")));
         click(By.xpath("//*[contains(@resource-id,'button3') and @text='OK']"));
     }
 
@@ -963,5 +963,21 @@ public class ApplicationManager {
         click(By.xpath("//*[contains(@resource-id,'item_name') and @text='Artificial Plant (8,00)']"));
 
     }
+    public void clickOnBackButton()
+    {
+        click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
+    }
+   public void checkingVoxmeCloudForDev() throws InterruptedException {
+       click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
+       click(By.xpath("//*[@resource-id='com.voxme.inventory.tablet:id/settings']"));
+       click(By.xpath("//*[contains(@resource-id,'text1') and @text='Configuration']"));
+       click(By.xpath("//*[contains(@resource-id, 'config_buttons_selector') and @index=1]"));
+       click(By.xpath("//*[contains(@resource-id, 'text1') and @index=1]"));
+       hideKeyboard();
+       Thread.sleep(1000);
+       click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
+       Thread.sleep(1000);
+       click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
 
+   }
 }

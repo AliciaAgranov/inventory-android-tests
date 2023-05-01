@@ -73,5 +73,6 @@ public class DownloadInventoryTest extends TestBase {
       app.clickToTheReturnUpButton();
       app.clickOnTheMenuButton();
       app.clickOnTheBackToJobListButton();
+
     }
 }

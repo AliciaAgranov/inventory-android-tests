@@ -7,7 +7,7 @@ public class CheckInventoryTest extends TestBase {
     @Test
         public void checkingAndScanningInProcess() throws InterruptedException {
             app.clickOnDownloadButton();
-            app.clickOnTheSearchInventory("10886-1-1");
+            app.clickOnTheSearchInventory("10929-1-1");
             app.selectFoundedInventory();
             app.downloadFoundedInventory();
             app.clickOnTheEditInventoryButton();
@@ -28,8 +28,8 @@ public class CheckInventoryTest extends TestBase {
             app.clickOnTheCheckButtonOnTheDiscovery();
             app.clickOnTheTruckIconToCreateLU();
             app.clickToAddSkidButton();
-          //  app.clickOnTheSelectSkidDropDown();
-          //  app.swipeSkidScreenUp();
+            app.clickOnTheSelectSkidDropDown();
+            app.swipeSkidScreenUp();
           //  app.selectContainer();
          //   app.clickToTheSkidOKButton();
          //   app.clickToAddSkidButton();
@@ -64,5 +64,6 @@ public class CheckInventoryTest extends TestBase {
          //   app.clickOnTheOKButtonOnThePopUp();
          //   app.screenshot();
         //    app.clickToTheReturnUpButton();
+
     }
 }

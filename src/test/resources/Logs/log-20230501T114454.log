@@ -1,0 +1,2 @@
+11:45:08.150 [Test worker] INFO  com.inventory.tests.TestBase - Start test downloadProdConfiguration
+11:45:57.521 [Test worker] INFO  com.inventory.tests.TestBase - Stop test downloadProdConfiguration

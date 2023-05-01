@@ -13,31 +13,19 @@ public class Dev extends TestBase {
         app.clickOnConfigurations();
         app.downloadSettings();
         app.clickOnTheOKButtonOnThePopUp();
-        app.clickOnTheDeviceReturnButton();
+        app.clickToTheReturnUpButton();
         app.clickOnTheVoxmeCloud();
-        Thread.sleep(500);
-        app.clickOnTheDeviceReturnButton();
+        app.clickToTheReturnUpButton();
         app.clickOnConfigurations();
         app.downloadConfigurations();
         app.closeTheWarningPopup();
         app.clickOnTheOKButtonOnThePopUp();
-        app.clickOnTheDeviceReturnButton();
+        app.clickToTheReturnUpButton();
+        app.clickOnTheVoxmeCloud();
+        app.clickToTheReturnUpButton();
+        Thread.sleep(1000);
+        app.checkingVoxmeCloudForDev();
 
 
-       // app.clickOnTheVoxmeCloud();
-      //  app.clickOnTheServerURL();
-       // app.selectProtocol();
-      //  app.typeDevURL();
-      //  app.typeApplication();
-      //  app.clickOnTheDeviceReturnButton();
-        // app.typeUserName("testuser3");
-        //app.typePassword("testuser3");
-        //app.clickOnTheDeviceReturnButton();
-        //app.clickOnConfigurations();
-
-
-
-       // app.clickToTheReturnUpButton();
-       // app.clickOnTheDeviceReturnButton();
     }
 }
