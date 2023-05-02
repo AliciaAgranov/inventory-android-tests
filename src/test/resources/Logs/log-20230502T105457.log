@@ -1,0 +1,2 @@
+10:55:12.690 [Test worker] INFO  com.inventory.tests.TestBase - Start test checkingAndScanningInProcess
+10:55:53.755 [Test worker] INFO  com.inventory.tests.TestBase - Stop test checkingAndScanningInProcess

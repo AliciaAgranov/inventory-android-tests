@@ -3,7 +3,7 @@ package com.inventory.tests;
 import org.testng.annotations.Test;
 
 public class UploadInventoryTest extends TestBase {
-
+ String nameOfPiece = "Cabinet";
     @Test
     public void uploadInventoryFromMFC() throws InterruptedException {
         app.clickOnDownloadButton();
@@ -16,14 +16,14 @@ public class UploadInventoryTest extends TestBase {
         app.selectPackageForNewPiece();
         app.selectPBOForNewPiece();
         app.swipeScreenDown();
-        app.addItemIntoNewPiece();
+        app.addItemIntoNewPiece(nameOfPiece);
         app.showParametersOfTheItem();
         app.changeTypeOfNewItem();
         app.addConditionToTheNewItem();
         app.hideKeyboard();
         app.addCommentToTheNewItem();
         app.hideKeyboard();
-        app.attachPhotoFromGallery();
+      //  app.attachPhotoFromGallery();
         app.attachPhotoFromCamera();
         app.clickOnTheDeviceReturnButton();
         app.clickToTheReturnUpButton();
@@ -35,18 +35,18 @@ public class UploadInventoryTest extends TestBase {
         app.hideKeyboard();
         app.fillConditionField();
         app.hideKeyboard();
-        app.attachPhotoFromGallery();
+     //   app.attachPhotoFromGallery();
         app.attachPhotoConditions();
         //app.clickOnTheDeviceReturnButton();
         app.clickOnPropertyConditionsFieldAfterPacking();
-        app.attachPhotoFromGallery();
+    //   app.attachPhotoFromGallery();
         app.attachPhotoConditions();
         //app.clickOnTheDeviceReturnButton();
         app.clickToTheReturnUpButton();
         app.clickToTheReturnUpButton();
         app.swipeScreenToTheLeft();
         app.clickToAddSkidButton();
-        app.attachPhotoFromGallery();
+     //   app.attachPhotoFromGallery();
         app.attachPhotoToTheNewSkid();
         //app.clickOnTheDeviceReturnButton();
         app.swipeScreenDown();

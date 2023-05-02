@@ -1,8 +1,7 @@
 package com.inventory.manager;
 
 import com.google.common.io.Files;
-import com.inventory.tests.UserRegistrationTest;
-import io.appium.java_client.MobileElement;
+import com.sun.scenario.effect.Offset;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.nativekey.AndroidKey;
@@ -10,16 +9,13 @@ import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.touch.LongPressOptions;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import sun.swing.SwingUtilities2;
 
-import javax.swing.*;
+import javax.swing.plaf.SpinnerUI;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -34,32 +30,43 @@ import static java.lang.Thread.sleep;
 import static java.time.Duration.ofSeconds;
 
 public class ApplicationManager {
+    String platformName = "Android";
+    String deviceName = "3666c3ac";
+    String platformVersion = "13";
+    String appPackage = "com.voxme.inventory.tablet";
+    String appActivity = "com.voxme.inventory.ui.StartupActivity";
+    String app = "C:\\apk.inventory\\VoxmeInventory-v18.0_Build_730.apk";
+    String noReset = "true";
+
 
     public AndroidDriver driver;
 
     public void start() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("platformName", "Android");
-        //capabilities.setCapability("deviceName", "emulator-5554");                              //emulator for Android
-        capabilities.setCapability("deviceName", "3666c3ac");                                 //tablet Sony Xperia Z3
-        //capabilities.setCapability("deviceName", "BH90015L8Z");                 //phone Sony Xperia XZ1
-        //capabilities.setCapability("platformVersion", "9");                     //phone Sony Xperia XZ1
-        //capabilities.setCapability("platformVersion", "8");                                     //emulator for Android
-        capabilities.setCapability("platformVersion", "13");                                     //tablet Sony Xperia Z3
-        capabilities.setCapability("appPackage", "com.voxme.inventory.tablet");
-        capabilities.setCapability("appActivity", "com.voxme.inventory.ui.StartupActivity");
-        capabilities.setCapability("noReset", "true");
+        capabilities.setCapability("platformName", platformName);
+        //capabilities.setCapability("deviceName", "emulator-5554");
+        capabilities.setCapability("deviceName", deviceName);
+        //capabilities.setCapability("deviceName", "BH90015L8Z");
+        //capabilities.setCapability("platformVersion", "9");
+        //capabilities.setCapability("platformVersion", "8");
+        capabilities.setCapability("platformVersion", platformVersion);
+        capabilities.setCapability("appPackage", appPackage);
+        capabilities.setCapability("appActivity", appActivity);
+        capabilities.setCapability("noReset", noReset);
         //     capabilities.setCapability("unlockType", "pin");
         //capabilities.setCapability("unlockKey", "9999");
         //     capabilities.setCapability("unlockKey", "9955");
-        capabilities.setCapability("app", "C:\\apk.inventory\\VoxmeInventory-v18.0_Build_730.apk");
+        capabilities.setCapability("app", app);
         // capabilities.setCapability("sauceLabsImageInjectionEnabled", true);
 
         driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 
-        
+
+
+
     }
+
 
 
 
@@ -69,22 +76,55 @@ public class ApplicationManager {
             driver.findElement(locator).sendKeys(text);
         }
     }
-
-    //TODO
     public void attachPhotoFromCamera() throws InterruptedException {
         click(By.id("article_photo_btn"));
-        if (isElementPresent(By.xpath("//android.widget.FrameLayout[@content-desc=\"Camera key\"]/android.widget.ImageView"))) {
-            click(By.xpath("//android.widget.FrameLayout[@content-desc=\"Camera key\"]/android.widget.ImageView"));
+
+        if (isElementPresent(By.xpath("//*[contains(@resource-id, 'message') and @text='You need to grant access to Camera in order to be able to use the camera., Camera']")))
+        {
+
+            click(By.xpath("//*[contains(@resource-id, 'button1') and @text = 'OK']"));
+            waitForElement(10,By.xpath("//*[contains(@resource-id, 'permission_allow_one_time_button') and @text='ONLY THIS TIME']"));
+            click(By.xpath("//*[contains(@resource-id, 'permission_allow_one_time_button') and @text='ONLY THIS TIME']"));
+            sleep(2000);
+            click(By.id("article_photo_btn"));
+            sleep(2000);
+           click(By.xpath("//*[contains(@resource-id,'shutter_button') and @index=0]"));
+           sleep(2000);
+            click(By.xpath("//*[contains(@resource-id, 'v9_camera_picker') and index=0]"));
+
         } else
-            click(By.xpath("//*[contains(@resource-id,'NONE') and @text='Shutter']"));
+            click(By.xpath("//*[contains(@resource-id,'shutter_button') and @index=0]"));
+        sleep(2000);
+        click(By.xpath("//*[contains(@resource-id, 'v9_camera_picker') and index=0]"));
+
         //click(By.xpath("//*[contains(@resource-id,'okay') and @text='OK']"));
         sleep(3000);
     }
-
-    public void attachPhotoFromGallery() {
+    public void clickOnGalleryButton()
+    {
         click(By.id("article_img_gallery_btn"));
-        click(By.xpath("//*[contains(@resource-id,'icon_thumb')]"));
+    }
+
+     public void attachPhotoFromGallery() throws InterruptedException {
+
+         click(By.id("article_img_gallery_btn"));
+        if(isElementPresent(By.xpath("//*[contains(@resource-id, 'message') and @text='You need to grant access to android.permission.READ_MEDIA_IMAGES to be able to access images from the gallery.']")))
+        {
+           click(By.xpath("//*[contains(@resource-id, 'button1') and @text = 'OK']"));
+
+           click(By.id("permission_allow_button"));
+           click(By.xpath("//*[contains(@resource-id,'icon_thumb')]"));
+        }
+        else
+            click(By.xpath("//*[contains(@resource-id,'icon_thumb')]"));
+          //  click(By.id("article_img_gallery_btn"));
+
         //click((By.xpath("//*[contains(@resource-id,'date') and @text='Dec 3, 2019']")));
+    }
+    public void selectPhotoFronGallery()
+    {
+        //click(By.xpath("//*[contains(@resource-id,'icon_thumb')]"));
+        click(By.xpath("//*[contains(@content-desc,'IMG_20230501_113549.jpg, 2.10 MB, 1 May') and @index=1]"));
     }
 
     public void waitForElement(long timeout, By locator) {
@@ -195,7 +235,7 @@ public class ApplicationManager {
     }
 
     public void clickOnTheEditInventoryButton() {
-        waitForElement(60, By.id("editInventory"));
+        waitForElement(80, By.id("editInventory"));
         click(By.id("editInventory"));
     }
 
@@ -205,6 +245,7 @@ public class ApplicationManager {
     }
 
     public void selectLocationForTheNewPiece() throws InterruptedException {
+        waitForElement(60, By.id("roomSpinner"));
         click(By.id("roomSpinner"));
         sleep(1000);
         driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()"
@@ -224,11 +265,13 @@ public class ApplicationManager {
         click(By.id("piece_pbo"));
     }
 
-    public void addItemIntoNewPiece() {
+    public void addItemIntoNewPiece(String text) throws InterruptedException {
         click(By.id("add_item"));
-        click(By.id("search_text"));
-        type(By.id("search_text"), "Cabinet");
-        click(By.xpath("//*[contains(@resource-id,'item_name') and @text='Cabinet (4,00)']"));
+       // click(By.id("search_text"));
+        driver.findElement(By.id("search_text")).sendKeys(text);
+        //type(By.id("search_text"), "Cabinet");
+        sleep(1000);
+        click(By.xpath("//*[contains(@resource-id,'item_name')]"));
     }
 
 
@@ -251,7 +294,7 @@ public class ApplicationManager {
 
     public void addConditionToTheNewItem() {
         click(By.id("piece_item_condition"));
-        click(By.xpath("//*[contains(@resource-id,'text1') and @text='Good']"));
+        click(By.xpath("//*[contains(@resource-id,'text1') and @text='Chipped']"));
     }
 
     public void addCommentToTheNewItem() {
@@ -261,13 +304,13 @@ public class ApplicationManager {
 
     public void addLocation() {
         click(By.id("add_location_btn"));
-        click(By.xpath("//*[contains(@resource-id,'text1') and @text='Location1']"));
+        click(By.xpath("//*[contains(@resource-id,'text1') and @text='Center']"));
         click(By.xpath("//*[contains(@resource-id,'button1') and @text='OK']"));
     }
 
     public void addCondition() {
         click(By.id("add_condition_btn"));
-        click(By.xpath("//*[contains(@resource-id,'text1') and @text='Broken']"));
+        click(By.xpath("//*[contains(@resource-id,'text1') and @text='Chipped']"));
         click(By.xpath("//*[contains(@resource-id,'button1') and @text='OK']"));
     }
 
@@ -423,10 +466,10 @@ public class ApplicationManager {
     }
 
     public void createSignature() throws InterruptedException {
-        //click(By.xpath("//*[contains(@resource-id, 'signature_view')]"));
+        click(By.xpath("//*[contains(@resource-id, 'signature_view')]"));
         sleep(3000);
         new TouchAction(driver)
-                .press(PointOption.point(795, 901))
+                .press(PointOption.point(795, 910))
                 .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
                 .moveTo(PointOption.point(277, 912))
                 .release().perform();
@@ -491,8 +534,8 @@ public class ApplicationManager {
     }
 
     public void selectAnItemFromInventory() {
-        if (isElementPresent(By.xpath("//*[contains(@text, 'Cabinet')]"))) {
-            click(By.xpath("//*[contains(@text, 'Cabinet')]"));
+        if (isElementPresent(By.xpath("//*[contains(@class, 'android.widget.LinearLayout')]"))) {
+            click(By.xpath("//*[contains(@class, 'android.widget.LinearLayout')]"));
         } else
             System.out.println("The transaction isn't contain Items");
     }
@@ -528,8 +571,11 @@ public class ApplicationManager {
         click(By.id("check_btn"));
     }
 
-    public void clickOnTheTruckIconToCreateLU() {
-        click(By.id("loader"));
+    public void goToTheTruckIconToCreateLU() throws InterruptedException {
+        swipeScreenToTheLeft();
+        swipeScreenToTheLeft();
+        sleep(2000);
+
     }
 
     public void selectLUFromDropDown() {
@@ -963,13 +1009,16 @@ public class ApplicationManager {
         click(By.xpath("//*[contains(@class,'android.widget.FrameLayout') and @index=2]"));
     }
 
-    public void addItemIntoNewwPiece() {
+    public void addItemIntoNewPiece2(String text) throws InterruptedException {
         click(By.id("add_item"));
-        click(By.id("search_text"));
-        type(By.id("search_text"), "Artificial");
-        click(By.xpath("//*[contains(@resource-id,'item_name') and @text='Artificial Plant (8,00)']"));
-
+        // click(By.id("search_text"));
+        driver.findElement(By.id("search_text")).sendKeys(text);
+        //type(By.id("search_text"), "Cabinet");
+        click(By.xpath("//*[contains(@resource-id,'item_name')]"));
+        sleep(1000);
+        click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
     }
+
     public void clickOnBackButton()
     {
         click(By.xpath("//*[contains(@class, 'ImageButton') and @index=0]"));
@@ -1006,4 +1055,65 @@ public class ApplicationManager {
        // for Polina's device
 
    }
+   public void createSingnature2() throws InterruptedException {
+       WebElement element = driver.findElement(By.xpath("//*[contains(@resource-id, 'signature_view')]"));
+       Point location = element.getLocation();
+       int X  = location.getX();
+       int Y= location.getY();
+
+       //click(By.xpath("//*[contains(@resource-id, 'signature_view')]"));
+       sleep(3000);
+       new TouchAction(driver)
+               .press(PointOption.point(location.x+300, location.y+600))
+               .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
+               .moveTo(PointOption.point(location.getX()+800, location.getY()+900))
+               .release().perform();
+   }
+   public void closeTheScanLoosePiecesPopup()
+   {
+       if (isElementPresent(By.xpath("//*[contains(@resource-id, 'message') and @text='Scan loose pieces?']")))
+       {
+           click(By.xpath("//*[contains(@resource-id, 'button2') and @text='NO']"));
+           click(By.xpath("//*[contains(@resource-id, 'stop_checking_btn') and @text='Stop']"));
+       }
+       else
+           click(By.xpath("//*[contains(@resource-id, 'stop_checking_btn') and @text='Stop']"));
+
+    }
+    public void clickOnOKCheckrButton()
+    {
+        click(By.id("ok_label_btn"));
+    }
+    public void clickOnStopButtonInChecker()
+    { if(isElementPresent(By.xpath("//*[contains(@resource-id, 'stop_checking_btn') and @text='Stop']")))
+        {click(By.xpath("//*[contains(@resource-id, 'stop_checking_btn') and @text='Stop']"));}
+        else
+        click(By.xpath("//*[contains(@class, 'android.widget.ImageButton') and @index=0]"));
+
+    }
+    public void closePopupIfPresent()
+    {
+        if (isElementPresent(By.xpath("//*[contains(@resource-id, 'alertTitle') and @text= 'Checker']")))
+        {
+            click(By.xpath("//*[contains(@resource-id, 'button3') and @text='OK']"));
+            click(By.xpath("//*[contains(@class, 'android.widget.ImageButton') and @index=0]"));
+
+        }
+        else
+            click(By.xpath("//*[contains(@resource-id, 'stop_checking_btn') and @text='Stop']"));
+            click(By.xpath("//*[contains(@class, 'android.widget.ImageButton') and @index=0]"));
+    }
+    public void clickOnSingandSendbutton()
+    {
+        click(By.xpath("//*[contains(@class, 'LinearLayout') and @index = 5]"));
+    }
+    public void addItemIntoNewPiece3(String text) throws InterruptedException {
+        click(By.id("add_item"));
+        // click(By.id("search_text"));
+        driver.findElement(By.id("search_text")).sendKeys(text);
+        //type(By.id("search_text"), "Cabinet");
+        click(By.xpath("//*[contains(@resource-id,'item_name')]"));
+        sleep(1000);
+
+    }
 }
