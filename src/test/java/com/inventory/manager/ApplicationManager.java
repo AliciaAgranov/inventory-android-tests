@@ -90,15 +90,9 @@ public class ApplicationManager {
             sleep(2000);
            click(By.xpath("//*[contains(@resource-id,'shutter_button') and @index=0]"));
            sleep(2000);
-            click(By.xpath("//*[contains(@resource-id, 'v9_camera_picker') and index=0]"));
-
         } else
             click(By.xpath("//*[contains(@resource-id,'shutter_button') and @index=0]"));
         sleep(2000);
-        click(By.xpath("//*[contains(@resource-id, 'v9_camera_picker') and index=0]"));
-
-        //click(By.xpath("//*[contains(@resource-id,'okay') and @text='OK']"));
-        sleep(3000);
     }
     public void clickOnGalleryButton()
     {
@@ -117,9 +111,11 @@ public class ApplicationManager {
         }
         else
             click(By.xpath("//*[contains(@resource-id,'icon_thumb')]"));
-          //  click(By.id("article_img_gallery_btn"));
 
-        //click((By.xpath("//*[contains(@resource-id,'date') and @text='Dec 3, 2019']")));
+    }
+    public void clickOnSavePhotoFromCamera()
+    {
+        click(By.xpath("//*[contains(@resource-id, 'v9_capture_picker_layout') and @index = 2]"));
     }
     public void selectPhotoFronGallery()
     {
@@ -317,7 +313,7 @@ public class ApplicationManager {
     public void selectRoomWithItem() {
         driver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector()"
                 + ".resourceId(\"com.voxme.inventory.tablet:id/roomSummaryList\")).scrollIntoView("
-                + "new UiSelector().text(\"Attic/Loft\"));").click();
+                + "new UiSelector().text(\"1\"));").click();
     }
 
     public void fillDescriptionField() {
@@ -337,7 +333,7 @@ public class ApplicationManager {
     }
 
     public void clickOnTheSelectConditionButtonOfPropertyBeforePacking() {
-        click(By.xpath("//*[contains(@resource-id,'text1') and @text='Good']"));
+        click(By.xpath("//*[contains(@resource-id,'text1') and @text='Fair']"));
         click(By.xpath("//*[contains(@resource-id,'button1') and @text='OK']"));
     }
 
@@ -358,7 +354,7 @@ public class ApplicationManager {
     }
 
     public void clickOnTheSelectConditionButtonOfPropertyAfterPacking() {
-        click(By.xpath("//*[contains(@resource-id,'text1') and @text='Good']"));
+        click(By.xpath("//*[contains(@resource-id,'text1') and @text='Loose']"));
         click(By.xpath("//*[contains(@resource-id,'button1') and @text='OK']"));
     }
 
@@ -435,7 +431,6 @@ public class ApplicationManager {
     }
 
     public void clickOnTheAddDocumentButton() {
-        //click(By.xpath("//*[contains(@resource-id,'add_doc') and @text='+']"));
         click(By.id("add_doc"));
     }
 
@@ -495,42 +490,70 @@ public class ApplicationManager {
 
     //TODO
     public void attachPhotoConditions() throws InterruptedException {
-        waitForElement(25, (By.id("add_photo")));
         click(By.id("add_photo"));
-        if (isElementPresent(By.xpath("//android.widget.FrameLayout[@content-desc=\"Camera key\"]/android.widget.ImageView"))) {
-            click(By.xpath("//android.widget.FrameLayout[@content-desc=\"Camera key\"]/android.widget.ImageView"));
+
+        if (isElementPresent(By.xpath("//*[contains(@resource-id, 'message') and @text='You need to grant access to Camera in order to be able to use the camera., Camera']")))
+        {
+
+            click(By.xpath("//*[contains(@resource-id, 'button1') and @text = 'OK']"));
+            waitForElement(10,By.xpath("//*[contains(@resource-id, 'permission_allow_one_time_button') and @text='ONLY THIS TIME']"));
+            click(By.xpath("//*[contains(@resource-id, 'permission_allow_one_time_button') and @text='ONLY THIS TIME']"));
+            sleep(2000);
+            click(By.id("add_photo"));
+            sleep(2000);
+            click(By.xpath("//*[contains(@resource-id,'shutter_button') and @index=0]"));
+            sleep(2000);
         } else
-            //click(By.xpath("//*[contains(@resource-id,'NONE') and @text='Shutter']"));
-            click(By.xpath("//*[contains(@resource-id,'okay') and @text='OK']")); // for Polina's device
-        sleep(10000);
+            click(By.xpath("//*[contains(@resource-id,'shutter_button') and @index=0]"));
+        sleep(2000);
     }
 
     //TODO
     public void attachPhotoToTheNewSkid() throws InterruptedException {
         click(By.id("skid_photo_btn"));
-        if (isElementPresent(By.xpath("//android.widget.FrameLayout[@content-desc=\"Camera key\"]/android.widget.ImageView"))) {
-            click(By.xpath("//android.widget.FrameLayout[@content-desc=\"Camera key\"]/android.widget.ImageView"));
+
+        if (isElementPresent(By.xpath("//*[contains(@resource-id, 'message') and @text='You need to grant access to Camera in order to be able to use the camera., Camera']")))
+        {
+
+            click(By.xpath("//*[contains(@resource-id, 'button1') and @text = 'OK']"));
+            waitForElement(10,By.xpath("//*[contains(@resource-id, 'permission_allow_one_time_button') and @text='ONLY THIS TIME']"));
+            click(By.xpath("//*[contains(@resource-id, 'permission_allow_one_time_button') and @text='ONLY THIS TIME']"));
+            sleep(2000);
+            click(By.id("skid_photo_btn"));
+            sleep(2000);
+            click(By.xpath("//*[contains(@resource-id,'shutter_button') and @index=0]"));
+            sleep(2000);
         } else
-            //click(By.xpath("//*[contains(@resource-id,'NONE') and @text='Shutter']"));
-            click(By.xpath("//*[contains(@resource-id,'okay') and @text='OK']")); // for Polina's device
-        sleep(5000);
+            click(By.xpath("//*[contains(@resource-id,'shutter_button') and @index=0]"));
+        sleep(2000);
+
     }
 
     //TODO
     public void attachPhotoToTheDocumentSection() throws InterruptedException {
         sleep(3000);
         click(By.id("add_photo_btn"));
-        if (isElementPresent(By.xpath("//android.widget.FrameLayout[@content-desc=\"Camera key\"]/android.widget.ImageView"))) {
-            click(By.xpath("//android.widget.FrameLayout[@content-desc=\"Camera key\"]/android.widget.ImageView"));
+
+        if (isElementPresent(By.xpath("//*[contains(@resource-id, 'message') and @text='You need to grant access to Camera in order to be able to use the camera., Camera']")))
+        {
+
+            click(By.xpath("//*[contains(@resource-id, 'button1') and @text = 'OK']"));
+            waitForElement(10,By.xpath("//*[contains(@resource-id, 'permission_allow_one_time_button') and @text='ONLY THIS TIME']"));
+            click(By.xpath("//*[contains(@resource-id, 'permission_allow_one_time_button') and @text='ONLY THIS TIME']"));
+            sleep(2000);
+            click(By.id("add_photo_btn"));
+            sleep(2000);
+            click(By.xpath("//*[contains(@resource-id,'shutter_button') and @index=0]"));
+            sleep(2000);
         } else
-            //click(By.xpath("//*[contains(@resource-id,'NONE') and @text='Shutter']"));
-            click(By.xpath("//*[contains(@resource-id,'okay') and @text='OK']")); // for Polina's device
-        sleep(5000);
+            click(By.xpath("//*[contains(@resource-id,'shutter_button') and @index=0]"));
+        sleep(2000);
     }
 
     public void attachPhotoToTheDocumentSectionFromGallery() throws InterruptedException {
         click(By.id("doc_img_gallery_btn"));
-        click((By.xpath("//*[contains(@resource-id,'date') and @text='Dec 3, 2019']")));
+        sleep(2000);
+        click(By.xpath("//*[contains(@resource-id,'icon_thumb')]"));
     }
 
     public void selectAnItemFromInventory() {
@@ -772,20 +795,29 @@ public class ApplicationManager {
     }
 
     public void openServiceList() {
-        click(By.xpath("//*[contains(@resource-id,'group_name') and @text='Group3-US']"));
+        click(By.xpath("//*[contains(@resource-id,'group_name') and @text='Group3']"));
     }
 
     public void addServiceText() {
         click(By.xpath("//*[contains(@resource-id,'item_value') and @text='Tap to edit']"));
-        type(By.id("textinput_placeholder"), "ContextTEST");
+        type(By.id("value_edit"), "ContextTEST");
     }
 
     public void addValueFromList() {
         click(By.xpath("//*[contains(@resource-id,'item_value') and @text='Tap to select value']"));
         if (isElementPresent(By.xpath("//*[contains(@resource-id,'text1') and @text='service1']"))) {
             click(By.xpath("//*[contains(@resource-id,'text1') and @text='service1']"));
+
         } else
-            click(By.xpath("//*[contains(@resource-id,'text1') and @text='value1']"));
+            click(By.xpath("//*[contains(@resource-id,'text1') and @text='service1']"));
+    }
+   public void addValueFromList2() {
+       click(By.xpath("//*[contains(@resource-id,'item_value') and @text='Tap to select value']"));
+       if (isElementPresent(By.xpath("//*[contains(@resource-id,'text1') and @text='val_1']"))) {
+           click(By.xpath("//*[contains(@resource-id,'text1') and @text='val_1']"));
+
+       } else
+            click(By.xpath("//*[contains(@resource-id,'text1') and @text = 'val_1']"));
     }
 
     public void attachSignature() throws InterruptedException {
@@ -800,17 +832,19 @@ public class ApplicationManager {
 
     public void attachPhotoFromCameraToService() throws InterruptedException {
         click(By.id("photo_thumbnail"));
-        if (isElementPresent(By.xpath("//android.widget.FrameLayout[@content-desc=\"Camera key\"]/android.widget.ImageView"))) {
-            click(By.xpath("//android.widget.FrameLayout[@content-desc=\"Camera key\"]/android.widget.ImageView"));
+        if (isElementPresent(By.xpath("//*[contains(@resource-id, 'alertTitle') and @text='Select an action']"))) {
+            click(By.xpath("//*[contains(@resource-id, 'text1') and @text='Take Photo']"));
+            click(By.xpath("//*[contains(@resource-id,'shutter_button') and @index=0]"));
+            sleep(2000);
         } else
-            click(By.xpath("//*[contains(@resource-id,'NONE') and @text='Shutter']"));
-        //click(By.xpath("//*[contains(@resource-id,'okay') and @text='OK']"));
+            click(By.xpath("//*[contains(@resource-id,'shutter_button') and @index=0]"));
         sleep(3000);
 
     }
 
     public void openFirstPropertiesList() {
-        click(By.xpath("//*[contains(@resource-id,'group_name') and @text='Group1-US']"));
+        click(By.xpath("//*[contains(@resource-id,'group_name') and @text='Group1']"));
+
     }
 
     public void addQuestionText() {
@@ -824,7 +858,7 @@ public class ApplicationManager {
     }
 
     public void openSecondPropertiesList() {
-        click(By.xpath("//*[contains(@resource-id,'group_name') and @text='Lena_GroupNameTransaction-US']"));
+        click(By.xpath("//*[contains(@resource-id,'group_name') and @text='name_1']"));
     }
 
     public void selectAnAction() {
@@ -1069,6 +1103,22 @@ public class ApplicationManager {
                .moveTo(PointOption.point(location.getX()+800, location.getY()+900))
                .release().perform();
    }
+    public void createSingnatureforAditionalService() throws InterruptedException {
+        click(By.xpath("//*[contains(@resource-id, 'signature_view')]"));
+        sleep(2000);
+        WebElement element = driver.findElement(By.xpath("//*[contains(@resource-id, 'signature_view')]"));
+        Point location = element.getLocation();
+        int X  = location.getX();
+        int Y= location.getY();
+
+        click(By.xpath("//*[contains(@resource-id, 'signature_view')]"));
+        sleep(3000);
+        new TouchAction(driver)
+                .press(PointOption.point(location.getX()+300, location.getY()+300))
+                .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1)))
+                .moveTo(PointOption.point(location.getX()+700, location.getY()+500))
+                .release().perform();
+    }
    public void closeTheScanLoosePiecesPopup()
    {
        if (isElementPresent(By.xpath("//*[contains(@resource-id, 'message') and @text='Scan loose pieces?']")))

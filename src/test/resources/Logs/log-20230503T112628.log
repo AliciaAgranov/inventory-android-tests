@@ -1,0 +1,2 @@
+11:26:45.734 [Test worker] INFO  com.inventory.tests.TestBase - Start test createNewInventory
+11:30:27.718 [Test worker] INFO  com.inventory.tests.TestBase - Stop test createNewInventory

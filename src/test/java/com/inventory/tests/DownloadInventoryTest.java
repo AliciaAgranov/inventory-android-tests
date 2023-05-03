@@ -3,8 +3,8 @@ package com.inventory.tests;
 import org.testng.annotations.Test;
 
 public class DownloadInventoryTest extends TestBase {
-
   String inventoryRef = "10936-1-1";
+  
     @Test
     public void downloadInventoryFromMFC() throws InterruptedException {
       app.clickOnDownloadButton();
@@ -16,7 +16,6 @@ public class DownloadInventoryTest extends TestBase {
       app.showParametersOfTheItem();
       app.isPhtotDownload();
       Thread.sleep(5000);
-      app.swipeScreenToTheRight();
       app.clickOnTheMenuButton();
       app.hideKeyboard();
       app.clickToTheGeneralInfo();
